@@ -6,10 +6,9 @@ import torchvision.transforms as transforms
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-# Cihaz kontrolü (GPU varsa kullan, yoksa CPU kullan)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# CIFAR-10 veri kümesi için veri dönüşümleri
+
 transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
     transforms.RandomCrop(32, padding=4),
@@ -81,7 +80,7 @@ for epoch in range(num_epochs):
     
     scheduler.step()
 
-print("Eğitim tamamlandı")
+print("TRAINING DONE")
 
 torch.save(model.state_dict(), 'model.pth')
 
@@ -96,4 +95,4 @@ with torch.no_grad():
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
 
-print(f"Test setindeki doğruluk: {100 * correct / total:.2f}%")
+print(f"TEST ACCURACY: {100 * correct / total:.2f}%")
