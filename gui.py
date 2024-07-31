@@ -9,7 +9,6 @@ import torch.nn.functional as F
 from PIL import Image
 import numpy as np
 
-# Define your ImprovedCNN model here
 class ImprovedCNN(nn.Module):
     def __init__(self):
         super(ImprovedCNN, self).__init__()
@@ -36,13 +35,12 @@ class ImprovedCNN(nn.Module):
         x = self.fc3(x)
         return x
 
-# Load your trained model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = ImprovedCNN().to(device)
-model.load_state_dict(torch.load('model.pth'))  # Make sure to save your trained model as 'model.pth'
+model.load_state_dict(torch.load('model.pth'))  
 model.eval()
 
-# CIFAR-10 dataset transformation for model input
+
 transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261))
@@ -56,10 +54,10 @@ display_transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
-# Class names for CIFAR-10
+
 class_names = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
-# Define the PyQt GUI
+
 class App(QWidget):
 
     def __init__(self):
